@@ -1,0 +1,18 @@
+# Build Results
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# VS folders
+.vs/
+*.user
+*.suo
+
+# Other
+*.log
+*.cache
+*.zip
+*.msi
+*.app
