@@ -72,8 +72,6 @@ Planned in the next version:
 
 ---
 
----
-
 ## 🛠 Built With
 
 - [C#](https://learn.microsoft.com/en-us/dotnet/csharp/)
