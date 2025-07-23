@@ -15,162 +15,93 @@
 
         private void InitializeComponent()
         {
-            scrollPanel = new Panel();
-            groupBoxDriveInfo = new GroupBox();
-            gridDriveInfo = new DataGridView();
-            txtDriveLogs = new TextBox();
-            btnStart = new Button();
-            btnStop = new Button();
-            btnUpload = new Button();
-            btnExport = new Button();
-            groupBoxCpuGpuInfo = new GroupBox();
-            gridCpuGpuInfo = new DataGridView();
-            txtCpuGpuLogs = new TextBox();
-            groupBoxBatteryPower = new GroupBox();
-            gridBatteryPower = new DataGridView();
-            txtBatteryLogs = new TextBox();
-            groupBoxBrowserExtensions = new GroupBox();
-            gridBrowserExtensions = new DataGridView();
-            txtBrowserLogs = new TextBox();
-            groupBoxAntivirus = new GroupBox();
-            gridAntivirus = new DataGridView();
-            txtAntivirusLogs = new TextBox();
-            groupBoxDeviceInfo = new GroupBox();
-            gridDeviceInfo = new DataGridView();
-            txtDeviceLogs = new TextBox();
-            groupBoxFirewall = new GroupBox();
-            gridFirewall = new DataGridView();
-            txtFirewallLogs = new TextBox();
-            groupBoxSoftwareAudit = new GroupBox();
-            gridSoftwareAudit = new DataGridView();
-            txtSoftwareLogs = new TextBox();
-            groupBoxDefenderThreats = new GroupBox();
-            gridDefenderThreats = new DataGridView();
-            txtDefenderLogs = new TextBox();
-            groupBoxEventLogs = new GroupBox();
-            gridEventLogs = new DataGridView();
-            txtEventLogs = new TextBox();
-            groupBoxHardwareInfo = new GroupBox();
-            gridHardware = new DataGridView();
-            txtHardwareLogs = new TextBox();
-            groupBoxNetwork = new GroupBox();
-            gridNetwork = new DataGridView();
-            txtNetworkLogs = new TextBox();
-            groupBoxPatch = new GroupBox();
-            gridPatchInfo = new DataGridView();
-            txtPatchLogs = new TextBox();
-            groupBoxPortMonitor = new GroupBox();
-            gridPortMonitor = new DataGridView();
-            txtPortLogs = new TextBox();
-            groupBoxProcessInfo = new GroupBox();
-            gridProcessInfo = new DataGridView();
-            txtProcessLogs = new TextBox();
-            groupBoxRdpSessions = new GroupBox();
-            gridRdpSessions = new DataGridView();
-            txtRdpLogs = new TextBox();
-            groupBoxRegistry = new GroupBox();
-            gridRegistry = new DataGridView();
-            txtRegistryLogs = new TextBox();
-            groupBoxSecurity = new GroupBox();
-            gridSecurity = new DataGridView();
-            txtSecurityLogs = new TextBox();
-            groupBoxUptime = new GroupBox();
-            gridUptime = new DataGridView();
-            txtUptimeLogs = new TextBox();
-            groupBoxUsbDevices = new GroupBox();
-            gridUsbDevices = new DataGridView();
-            txtUsbLogs = new TextBox();
-            groupBoxWindowsUpdate = new GroupBox();
-            gridWindowsUpdate = new DataGridView();
-            txtUpdateLogs = new TextBox();
-            groupBoxStatusMonitor = new GroupBox();
-            gridStatusMonitor = new DataGridView();
-            txtStatusLogs = new TextBox();
-
+            scrollPanel = new FlowLayoutPanel();
+            ((FlowLayoutPanel)scrollPanel).AutoScroll = true;
+            ((FlowLayoutPanel)scrollPanel).Dock = DockStyle.Fill;
+            ((FlowLayoutPanel)scrollPanel).WrapContents = true;
+            ((FlowLayoutPanel)scrollPanel).FlowDirection = FlowDirection.LeftToRight;
+            ((FlowLayoutPanel)scrollPanel).Padding = new Padding(10);
+            ((FlowLayoutPanel)scrollPanel).AutoSize = true;
 
             SuspendLayout();
 
+            // Create all controls
+            btnStart = new Button(); btnStop = new Button(); btnUpload = new Button(); btnExport = new Button();
+            groupBoxDriveInfo = new GroupBox(); gridDriveInfo = new DataGridView(); txtDriveLogs = new TextBox();
+            groupBoxCpuGpuInfo = new GroupBox(); gridCpuGpuInfo = new DataGridView(); txtCpuGpuLogs = new TextBox();
+            groupBoxBatteryPower = new GroupBox(); gridBatteryPower = new DataGridView(); txtBatteryLogs = new TextBox();
+            groupBoxBrowserExtensions = new GroupBox(); gridBrowserExtensions = new DataGridView(); txtBrowserLogs = new TextBox();
+            groupBoxAntivirus = new GroupBox(); gridAntivirus = new DataGridView(); txtAntivirusLogs = new TextBox();
+            groupBoxDeviceInfo = new GroupBox(); gridDeviceInfo = new DataGridView(); txtDeviceLogs = new TextBox();
+            groupBoxFirewall = new GroupBox(); gridFirewall = new DataGridView(); txtFirewallLogs = new TextBox();
+            groupBoxSoftwareAudit = new GroupBox(); gridSoftwareAudit = new DataGridView(); txtSoftwareLogs = new TextBox();
+            groupBoxDefenderThreats = new GroupBox(); gridDefenderThreats = new DataGridView(); txtDefenderLogs = new TextBox();
+            groupBoxEventLogs = new GroupBox(); gridEventLogs = new DataGridView(); txtEventLogs = new TextBox();
+            groupBoxHardwareInfo = new GroupBox(); gridHardware = new DataGridView(); txtHardwareLogs = new TextBox();
+            groupBoxNetwork = new GroupBox(); gridNetwork = new DataGridView(); txtNetworkLogs = new TextBox();
+            groupBoxPatch = new GroupBox(); gridPatchInfo = new DataGridView(); txtPatchLogs = new TextBox();
+            groupBoxPortMonitor = new GroupBox(); gridPortMonitor = new DataGridView(); txtPortLogs = new TextBox();
+            groupBoxProcessInfo = new GroupBox(); gridProcessInfo = new DataGridView(); txtProcessLogs = new TextBox();
+            groupBoxRdpSessions = new GroupBox(); gridRdpSessions = new DataGridView(); txtRdpLogs = new TextBox();
+            groupBoxRegistry = new GroupBox(); gridRegistry = new DataGridView(); txtRegistryLogs = new TextBox();
+            groupBoxSecurity = new GroupBox(); gridSecurity = new DataGridView(); txtSecurityLogs = new TextBox();
+            groupBoxUptime = new GroupBox(); gridUptime = new DataGridView(); txtUptimeLogs = new TextBox();
+            groupBoxUsbDevices = new GroupBox(); gridUsbDevices = new DataGridView(); txtUsbLogs = new TextBox();
+            groupBoxWindowsUpdate = new GroupBox(); gridWindowsUpdate = new DataGridView(); txtUpdateLogs = new TextBox();
+            groupBoxStatusMonitor = new GroupBox(); gridStatusMonitor = new DataGridView(); txtStatusLogs = new TextBox();
 
-            scrollPanel.AutoScroll = true;
-            scrollPanel.Dock = DockStyle.Fill;
-            scrollPanel.Location = new Point(0, 0);
-            scrollPanel.Name = "scrollPanel";
-            scrollPanel.Size = new Size(1200, 800);
+            Controls.Add(scrollPanel);
 
-            int marginX = 20;
-            int marginY = 20;
-            int boxWidth = 560;
-            int boxHeight = 260;
-
-            GroupBox[] groupBoxes = new GroupBox[]
+            void SetupGroup(GroupBox group, string title, DataGridView grid, TextBox txt, bool addButtons = false)
             {
-                groupBoxDriveInfo, groupBoxCpuGpuInfo, groupBoxBatteryPower, groupBoxBrowserExtensions,
-                groupBoxAntivirus, groupBoxDeviceInfo, groupBoxFirewall, groupBoxSoftwareAudit,groupBoxDefenderThreats,
-                groupBoxEventLogs,groupBoxHardwareInfo,groupBoxNetwork,groupBoxPatch,groupBoxPortMonitor,groupBoxProcessInfo,
-                groupBoxRdpSessions,groupBoxRegistry,groupBoxSecurity,groupBoxUptime,groupBoxUsbDevices,groupBoxWindowsUpdate,
-                groupBoxStatusMonitor,// 👈 Add this last
+                group.Text = title;
+                group.Size = new Size(600, 280);
+                group.Margin = new Padding(10);
 
+                grid.Dock = DockStyle.Top;
+                grid.Height = 150;
 
-            };
+                txt.Dock = DockStyle.Fill;
+                txt.Multiline = true;
+                txt.ScrollBars = ScrollBars.Vertical;
 
-            for (int i = 0; i < groupBoxes.Length; i++)
-            {
-                var group = groupBoxes[i];
-                group.Size = new Size(boxWidth, boxHeight);
-                group.Location = new Point(
-                    marginX + (i % 2) * (boxWidth + marginX),
-                    marginY + (i / 2) * (boxHeight + marginY)
-                );
+                group.Controls.Add(txt);
+                group.Controls.Add(grid);
+
+                if (addButtons)
+                {
+                    Panel buttonPanel = new Panel();
+                    buttonPanel.Dock = DockStyle.Bottom;
+                    buttonPanel.Height = 40;
+
+                    btnStart.Text = "Start";
+                    btnStart.Size = new Size(80, 30);
+                    btnStart.Location = new Point(10, 5);
+                    btnStart.Click += btnStart_Click;
+
+                    btnStop.Text = "Stop";
+                    btnStop.Size = new Size(80, 30);
+                    btnStop.Location = new Point(100, 5);
+                    btnStop.Click += btnStop_Click;
+
+                    btnUpload.Text = "Upload";
+                    btnUpload.Size = new Size(80, 30);
+                    btnUpload.Location = new Point(190, 5);
+                    btnUpload.Click += btnUpload_Click;
+
+                    btnExport.Text = "Export";
+                    btnExport.Size = new Size(80, 30);
+                    btnExport.Location = new Point(280, 5);
+                    btnExport.Click += btnExport_Click;
+
+                    buttonPanel.Controls.AddRange(new Control[] { btnStart, btnStop, btnUpload, btnExport });
+                    group.Controls.Add(buttonPanel);
+                }
+
                 scrollPanel.Controls.Add(group);
             }
 
-            // Drive Info
-            groupBoxDriveInfo.Text = "Drive Info";
-            groupBoxDriveInfo.Controls.Add(gridDriveInfo);
-            groupBoxDriveInfo.Controls.Add(txtDriveLogs);
-            groupBoxDriveInfo.Controls.Add(btnStart);
-            groupBoxDriveInfo.Controls.Add(btnStop);
-            groupBoxDriveInfo.Controls.Add(btnUpload);
-            groupBoxDriveInfo.Controls.Add(btnExport);
-
-            gridDriveInfo.Size = new Size(540, 150);
-            gridDriveInfo.Location = new Point(10, 20);
-
-            txtDriveLogs.Size = new Size(540, 30);
-            txtDriveLogs.Location = new Point(10, 180);
-
-            btnStart.Text = "Start";
-            btnStart.Location = new Point(10, 220);
-            btnStart.Click += btnStart_Click;
-
-            btnStop.Text = "Stop";
-            btnStop.Location = new Point(90, 220);
-            btnStop.Click += btnStop_Click;
-
-            btnUpload.Text = "Upload";
-            btnUpload.Location = new Point(170, 220);
-            btnUpload.Click += btnUpload_Click;
-
-            btnExport.Text = "Export";
-            btnExport.Location = new Point(250, 220);
-            btnExport.Click += btnExport_Click;
-
-            // Common UI builder function
-            void SetupGroup(GroupBox group, string title, DataGridView grid, TextBox txt)
-            {
-                group.Text = title;
-                group.Controls.Add(grid);
-                group.Controls.Add(txt);
-
-                grid.Size = new Size(540, 150);
-                grid.Location = new Point(10, 20);
-
-                txt.Size = new Size(540, 80);
-                txt.Location = new Point(10, 180);
-                txt.Multiline = true;
-                txt.ScrollBars = ScrollBars.Vertical;
-            }
-
+            SetupGroup(groupBoxDriveInfo, "Drive Info", gridDriveInfo, txtDriveLogs, true);
             SetupGroup(groupBoxCpuGpuInfo, "CPU & GPU Info", gridCpuGpuInfo, txtCpuGpuLogs);
             SetupGroup(groupBoxBatteryPower, "Battery Power", gridBatteryPower, txtBatteryLogs);
             SetupGroup(groupBoxBrowserExtensions, "Browser Extensions", gridBrowserExtensions, txtBrowserLogs);
@@ -189,15 +120,14 @@
             SetupGroup(groupBoxRegistry, "Registry Audit", gridRegistry, txtRegistryLogs);
             SetupGroup(groupBoxSecurity, "Security Event Logs", gridSecurity, txtSecurityLogs);
             SetupGroup(groupBoxUptime, "System Uptime Info", gridUptime, txtUptimeLogs);
-            SetupGroup(groupBoxUptime, "System Uptime Info", gridUptime, txtUptimeLogs);
             SetupGroup(groupBoxUsbDevices, "USB Devices", gridUsbDevices, txtUsbLogs);
             SetupGroup(groupBoxWindowsUpdate, "Windows Updates", gridWindowsUpdate, txtUpdateLogs);
             SetupGroup(groupBoxStatusMonitor, "Drive Status Monitor (SMART)", gridStatusMonitor, txtStatusLogs);
 
-            Controls.Add(scrollPanel);
             Name = "MainForm";
             Text = "Monitoring Agent";
             WindowState = FormWindowState.Maximized;
+            MinimumSize = new Size(1280, 720);
             Load += MainForm_Load;
 
             ResumeLayout(false);
@@ -210,6 +140,10 @@
         private GroupBox groupBoxDriveInfo;
         private DataGridView gridDriveInfo;
         private TextBox txtDriveLogs;
+        private Button btnStart;
+        private Button btnStop;
+        private Button btnUpload;
+        private Button btnExport;
 
         private GroupBox groupBoxCpuGpuInfo;
         private DataGridView gridCpuGpuInfo;
@@ -278,7 +212,7 @@
         private GroupBox groupBoxSecurity;
         private DataGridView gridSecurity;
         private TextBox txtSecurityLogs;
-
+       
         private GroupBox groupBoxUptime;
         private DataGridView gridUptime;
         private TextBox txtUptimeLogs;
@@ -294,10 +228,5 @@
         private GroupBox groupBoxStatusMonitor;
         private DataGridView gridStatusMonitor;
         private TextBox txtStatusLogs;
-
-        private Button btnStart;
-        private Button btnStop;
-        private Button btnUpload;
-        private Button btnExport;
     }
 }

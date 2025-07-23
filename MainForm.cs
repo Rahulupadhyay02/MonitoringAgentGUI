@@ -1,8 +1,9 @@
+using MonitoringAgent.Models;
+using MonitoringAgent.Modules;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
-using MonitoringAgent.Modules;
-using MonitoringAgent.Models;
 
 namespace MonitoringAgentGUI
 {
@@ -47,8 +48,34 @@ namespace MonitoringAgentGUI
 
         private void btnStop_Click(object? sender, EventArgs e)
         {
-            txtDriveLogs.AppendText("Monitoring stopped.\r\n");
+            string message = "Monitoring stopped at " + DateTime.Now.ToString("g") + Environment.NewLine;
+
+            txtDriveLogs.AppendText(message);
+            txtCpuGpuLogs.AppendText(message);
+            txtBatteryLogs.AppendText(message);
+            txtBrowserLogs.AppendText(message);
+            txtAntivirusLogs.AppendText(message);
+            txtDeviceLogs.AppendText(message);
+            txtFirewallLogs.AppendText(message);
+            txtSoftwareLogs.AppendText(message);
+            txtDefenderLogs.AppendText(message);
+            txtEventLogs.AppendText(message);
+            txtHardwareLogs.AppendText(message);
+            txtNetworkLogs.AppendText(message);
+            txtPatchLogs.AppendText(message);
+            txtPortLogs.AppendText(message);
+            txtProcessLogs.AppendText(message);
+            txtRdpLogs.AppendText(message);
+            txtRegistryLogs.AppendText(message);
+            txtSecurityLogs.AppendText(message);
+            txtUptimeLogs.AppendText(message);
+            txtUsbLogs.AppendText(message);
+            txtUpdateLogs.AppendText(message);
+            txtStatusLogs.AppendText(message);
+
+            MessageBox.Show("Monitoring has been stopped.", "Stopped", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         private void btnUpload_Click(object? sender, EventArgs e)
         {
@@ -58,9 +85,122 @@ namespace MonitoringAgentGUI
 
         private void btnExport_Click(object? sender, EventArgs e)
         {
-            txtDriveLogs.AppendText("Exporting logs to file...\r\n");
-            // TODO: Add export logic
+            try
+            {
+                // Create SaveFileDialog
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                    saveFileDialog.Title = "Export Logs";
+                    saveFileDialog.FileName = "SystemLogs.txt";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        StringBuilder sb = new StringBuilder();
+
+                        // Append logs with section headers
+                        sb.AppendLine("===== Drive Info =====");
+                        sb.AppendLine(txtDriveLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== CPU & GPU Info =====");
+                        sb.AppendLine(txtCpuGpuLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Battery Power =====");
+                        sb.AppendLine(txtBatteryLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Browser Extensions =====");
+                        sb.AppendLine(txtBrowserLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Antivirus Info =====");
+                        sb.AppendLine(txtAntivirusLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Device Info =====");
+                        sb.AppendLine(txtDeviceLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Firewall Info =====");
+                        sb.AppendLine(txtFirewallLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Software Audit =====");
+                        sb.AppendLine(txtSoftwareLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Defender Threat Logs =====");
+                        sb.AppendLine(txtDefenderLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Windows Event Logs =====");
+                        sb.AppendLine(txtEventLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Hardware Info =====");
+                        sb.AppendLine(txtHardwareLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Network Info =====");
+                        sb.AppendLine(txtNetworkLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Patch Info =====");
+                        sb.AppendLine(txtPatchLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Open Ports Monitor =====");
+                        sb.AppendLine(txtPortLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Running Processes =====");
+                        sb.AppendLine(txtProcessLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== RDP Sessions =====");
+                        sb.AppendLine(txtRdpLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Registry Audit =====");
+                        sb.AppendLine(txtRegistryLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Security Event Logs =====");
+                        sb.AppendLine(txtSecurityLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== System Uptime Info =====");
+                        sb.AppendLine(txtUptimeLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== USB Devices =====");
+                        sb.AppendLine(txtUsbLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Windows Updates =====");
+                        sb.AppendLine(txtUpdateLogs.Text);
+                        sb.AppendLine();
+
+                        sb.AppendLine("===== Drive Status Monitor (SMART) =====");
+                        sb.AppendLine(txtStatusLogs.Text);
+                        sb.AppendLine();
+
+                        // Save to file
+                        File.WriteAllText(saveFileDialog.FileName, sb.ToString());
+
+                        MessageBox.Show("Logs exported successfully!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Export failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
         private void LoadDriveInfo()
         {
